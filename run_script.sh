@@ -17,7 +17,7 @@ fi
 
 # open --background -a Docker
   docker pull ratish11/rapid-demo:1.0.3
-  
+  docker pull ratish11/rapid-demo-ui:1.0.2
   docker pull chromadb/chroma:0.6.3
   docker pull ollama/ollama
   docker network create -d bridge rapid-demo-network
@@ -26,4 +26,4 @@ fi
   docker exec ollama ollama pull deepseek-r1
   docker run -d -v chroma-data:/data -e ALLOW_RESET=true -p 8000:8000 --name chromadb --network   rapid-demo-network chromadb/chroma:0.6.3
   docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo rapid-demo:1.0.3
-  docker run -d -p 3000:3000 --network rapid-demo-network --name rapid-demo-ui rapid-demo-ui:1.0.1
+  docker run -d -p 3000:3000 --network rapid-demo-network --name rapid-demo-ui rapid-demo-ui:1.0.2
