@@ -6,7 +6,9 @@ then
   # Add commands to execute if Docker is not installed here, for example:
   brew install docker
   if [ $? -eq 0 ]; then
-    echo "docker imstallation successful"
+    echo "docker imstallation successful, starting docker service"
+    open -a Docker
+    
   else
     echo "docker installation failed, exiting, try installing docker manually and then rerun this script"
     exit 1
