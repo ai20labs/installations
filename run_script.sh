@@ -33,5 +33,5 @@ fi
   docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo ratish11/rapid-demo:1.0.3
   docker run -d -p 3000:3000 --network rapid-demo-network --name rapid-demo-ui ratish11/rapid-demo-ui:1.0.2
   echo "Installations complete, loading model in memory"
-  curl -X POST -H "Content-Type: application/json" -d `{"model": ${model_name}, "prompt": "What is the capital of France?", "keep_alive": 15}` http://localhost:11434/api/generate > /dev/null
+  curl -X POST -H "Content-Type: application/json" -d '{"model": ${model_name}, "prompt": "What is the capital of France?", "keep_alive": 15}' http://localhost:11434/api/generate > /dev/null
 
