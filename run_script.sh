@@ -2,17 +2,17 @@
 #docker build  --no-cache  -t rapid-demo-ui:1.0.0 . #for building images
 if ! command -v docker &> /dev/null
 then
-  echo "Docker is not installed. Trying to install with brew, if fails, please install docker \n ref: https://docs.docker.com/desktop/setup/install/mac-install/"
+  echo "Docker is not installed. Install docker from \n ref: https://docs.docker.com/desktop/setup/install/mac-install/"
   # Add commands to execute if Docker is not installed here, for example:
-  brew install docker
-  if [ $? -eq 0 ]; then
-    echo "docker imstallation successful, starting docker service"
-    open -a Docker
+  # brew install docker
+  # if [ $? -eq 0 ]; then
+  #   echo "docker imstallation successful, starting docker service"
+  #   open -a Docker
     
-  else
-    echo "docker installation failed, exiting, try installing docker manually and then rerun this script"
-    exit 1
-  fi
+  # else
+  #   echo "docker installation failed, exiting, try installing docker manually and then rerun this script"
+  #   exit 1
+  # fi
 else
   echo "Docker is installed. proceeding.., starting docker service"
   open -a Docker
