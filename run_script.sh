@@ -20,18 +20,21 @@ else
 fi
 
 # open --background -a Docker
-  docker pull ratish11/rapid-demo:1.0.3
-  docker pull ratish11/rapid-demo-ui:1.0.2
-  docker pull chromadb/chroma:0.6.3
-  docker pull ollama/ollama
-  docker network create -d bridge rapid-demo-network
-  docker volume create ollama 
-  docker volume create chroma-data
-  docker run -d -v ollama:/root/.ollama -p 11434:11434 --network rapid-demo-network --name ollama ollama/ollama
-  docker exec ollama ollama pull ${model_name}
-  docker run -d -v chroma-data:/data -e ALLOW_RESET=true -p 8000:8000 --name chromadb --network   rapid-demo-network chromadb/chroma:0.6.3
-  docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo ratish11/rapid-demo:1.0.3
-  docker run -d -p 3000:3000 --network rapid-demo-network --name rapid-demo-ui ratish11/rapid-demo-ui:1.0.2
-  echo "Installations complete, loading model in memory"
-  curl -X POST -H "Content-Type: application/json" -d '{"model": ${model_name}, "prompt": "What is the capital of France?", "keep_alive": 15}' http://localhost:11434/api/generate > /dev/null
+#clean old service is existing
+docker stop rapid-demo-ui rapid-demo chromadb ollama
+docker rm -f  rapid-demo-ui rapid-demo chromadb ollama
+docker pull ratish11/rapid-demo:1.0.3
+docker pull ratish11/rapid-demo-ui:1.0.2
+docker pull chromadb/chroma:0.6.3
+docker pull ollama/ollama
+docker network create -d bridge rapid-demo-network
+docker volume create ollama 
+docker volume create chroma-data
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --network rapid-demo-network --name ollama ollama/ollama
+docker exec ollama ollama pull ${model_name}
+docker run -d -v chroma-data:/data -e ALLOW_RESET=true -p 8000:8000 --name chromadb --network   rapid-demo-network chromadb/chroma:0.6.3
+docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo ratish11/rapid-demo:1.0.3
+docker run -d -p 3000:3000 --network rapid-demo-network --name rapid-demo-ui ratish11/rapid-demo-ui:1.0.2
+echo "Installations complete, loading model in memory"
+curl -X POST -H "Content-Type: application/json" -d '{"model": ${model_name}, "prompt": "What is the capital of France?", "keep_alive": 15}' http://localhost:11434/api/generate > /dev/null
 
