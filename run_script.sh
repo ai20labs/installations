@@ -14,7 +14,8 @@ then
     exit 1
   fi
 else
-  echo "Docker is installed. proceeding.."
+  echo "Docker is installed. proceeding.., starting docker service"
+  open -a Docker
 fi
 
 # open --background -a Docker
