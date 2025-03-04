@@ -1,9 +1,10 @@
 !#/bin/bash
-model_name="deepseek-r1"
+model_name="gemma:2b"
 #docker build  --no-cache  -t rapid-demo-ui:1.0.0 . #for building images
 if ! command -v docker &> /dev/null
 then
   echo "Docker is not installed. Install docker from \n ref: https://docs.docker.com/desktop/setup/install/mac-install/"
+  exit 1
   # Add commands to execute if Docker is not installed here, for example:
   # brew install docker
   # if [ $? -eq 0 ]; then
@@ -16,14 +17,13 @@ then
   # fi
 else
   echo "Docker is installed. proceeding.., starting docker service"
-  open -a Docker
 fi
 
 # open --background -a Docker
 #clean old service is existing
 docker stop rapid-demo-ui rapid-demo chromadb ollama
 docker rm -f  rapid-demo-ui rapid-demo chromadb ollama
-docker pull ratish11/rapid-demo:1.0.3
+docker pull ratish11/rapid-demo:1.0.4
 docker pull ratish11/rapid-demo-ui:1.0.2
 docker pull chromadb/chroma:0.6.3
 docker pull ollama/ollama
