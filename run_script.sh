@@ -33,7 +33,7 @@ docker volume create chroma-data
 docker run -d -e -v ollama:/root/.ollama -p 11434:11434 --network rapid-demo-network --name ollama ollama/ollama
 docker exec ollama ollama pull ${model_name}
 docker run -d -v chroma-data:/data -e ALLOW_RESET=true -p 8000:8000 --name chromadb --network   rapid-demo-network chromadb/chroma:0.6.3
-docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo ratish11/rapid-demo:1.1.0
+docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo ratish11/rapid-demo:1.1.1
 docker run -d -p 3000:3000 --network rapid-demo-network --name rapid-demo-ui ratish11/rapid-demo-ui:1.1.0
 echo "Installations complete, loading model in memory"
 # curl -X POST -H "Content-Type: application/json" -d "{\"model\": \"${model_name}\", \"prompt\": \"What is the capital of France?\", \"keep_alive\": 15}" http://localhost:11434/api/generate > /dev/null
