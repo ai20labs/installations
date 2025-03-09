@@ -23,8 +23,8 @@ fi
 #clean old service is existing
 docker stop rapid-demo-ui rapid-demo chromadb ollama
 docker rm -f  rapid-demo-ui rapid-demo chromadb ollama
-docker pull ratish11/rapid-demo:1.0.4
-docker pull ratish11/rapid-demo-ui:1.0.2
+docker pull ratish11/rapid-demo:1.1.2
+docker pull ratish11/rapid-demo-ui:1.1.0
 docker pull chromadb/chroma:0.6.3
 docker pull ollama/ollama
 docker network create -d bridge rapid-demo-network
