@@ -30,7 +30,7 @@ docker pull ollama/ollama
 docker network create -d bridge rapid-demo-network
 docker volume create ollama 
 docker volume create chroma-data
-docker run -d -e -v ollama:/root/.ollama -p 11434:11434 --network rapid-demo-network --name ollama ollama/ollama
+docker run -d -v ollama:/root/.ollama -p 11434:11434 --network rapid-demo-network --name ollama ollama/ollama
 docker exec ollama ollama pull ${model_name}
 docker run -d -v chroma-data:/data -e ALLOW_RESET=true -p 8000:8000 --name chromadb --network   rapid-demo-network chromadb/chroma:0.6.3
 docker run -d -p 8080:8080 --network rapid-demo-network --name rapid-demo ratish11/rapid-demo:1.1.2
