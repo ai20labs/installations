@@ -40,5 +40,5 @@ echo "Installations complete, loading model in memory"
 curl http://localhost:11434/api/generate -d "{ \"model\": \"${model_name}\", \"keep_alive\": -1}"
 #check ollama model status
 docker exec ollama ollama ps
-docker image prune -a -f
+docker image prune -a 
 
