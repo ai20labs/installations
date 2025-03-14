@@ -21,8 +21,32 @@ WinGov AI is an LLM-based application that leverages GPU resources for optimal p
 3. Run the following command to download and execute the installation script:
 
    ```bash
-   curl -O https://raw.githubusercontent.com/ai20labs/installations/refs/heads/main/run_script.sh && chmod +x run_script.sh && ./run_script.sh
+   curl -O https://raw.githubusercontent.com/ai20labs/installations/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
    ```
+   ## Usage Examples:
+      ### Standard installation
+     ```bash
+      ./install.sh
+     ```
+      ### Clean installation with a specific model
+    ```bash
+     ./install.sh --clean --model=llama3:8b
+    ```
+      ### Restart the application
+    ```bash
+        ./install.sh --restart
+    ```
+      ### Stop the application
+    ```bash
+        ./install.sh --stop
+    ```
+
+   Command-line Options  
+  - --clean: Performs a complete clean installation
+  - --install: Standard installation (default)
+  - --restart: Restarts the application
+  - --stop: Stops the application
+  - --model=MODEL_NAME: Specifies which model to use (default: gemma3:1b)
 
    This script will:
    - Verify Docker is installed
@@ -49,7 +73,6 @@ WinGov AI consists of the following components:
 
 After installation, you can access the application at:
 - UI: [http://localhost:3000](http://localhost:3000)
-- API: [http://localhost:8080](http://localhost:8080)
 
 ## Troubleshooting
 
