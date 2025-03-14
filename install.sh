@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration - Set these variables
-RAPID_DEMO_VERSION="1.1.4"
+RAPID_DEMO_VERSION="1.1.5"
 RAPID_DEMO_UI_VERSION="1.1.3"
 CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
