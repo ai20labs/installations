@@ -110,7 +110,7 @@ clean_install() {
 
     # Remove volumes
     echo "Removing volumes..."
-    docker volume rm $OLLAMA_VOLUME $CHROMA_VOLUME 2>/dev/null || true
+    docker volume rm $OLLAMA_VOLUME $CHROMA_VOLUME $BACKEND_CACHE 2>/dev/null || true
     echo "✅ Volumes removed."
 
     # Remove network
