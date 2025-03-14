@@ -1,5 +1,5 @@
 !#/bin/bash
-model_name="gemma3:4b"
+model_name="gemma3:1b"
 #docker build  --no-cache  -t rapid-demo-ui:1.0.0 . #for building images
 if ! command -v docker &> /dev/null
 then
