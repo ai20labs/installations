@@ -144,7 +144,8 @@ install_components() {
     # Create volumes
     echo "Creating volumes..."
     docker volume create $OLLAMA_VOLUME
-    docker volume create $CHROMA_VOLUME
+    docker volume create $CHROMA_VOLUME 
+    docker volume create $BACKEND_CACHE
     echo "✅ Volumes created."
 
     # Start Ollama
