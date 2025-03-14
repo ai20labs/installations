@@ -55,6 +55,7 @@ done
 NETWORK_NAME="rapid-demo-network"
 OLLAMA_VOLUME="ollama"
 CHROMA_VOLUME="chroma-data"
+BACKEND_CACHE="backend_cache"
 
 # Function to check if Docker is installed and running
 check_docker() {
@@ -180,6 +181,7 @@ install_components() {
     docker run -d \
         -p 8080:8080 \
         --network $NETWORK_NAME \
+        -v $BACKEND_CACHE:/root/.cache/ \
         --name rapid-demo \
         --restart unless-stopped \
         -e MODEL_NAME=$MODEL_NAME \
