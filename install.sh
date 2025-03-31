@@ -203,7 +203,7 @@ install_components() {
 
     echo "Loading model into memory..."
     curl -s http://localhost:11434/api/generate -d "{ \"model\": \"$MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload model. It will be loaded on first request."; }
-    curl -s http://localhost:11434/api/generate -d "{ \"model\": \"$EMBED_MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload embedding model. It will be loaded on first request."; }
+    curl -s http://localhost:11434/api/embed -d "{ \"model\": \"$EMBED_MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload embedding model. It will be loaded on first request."; }
     docker exec ollama ollama ps
     echo "✅ Installation complete!"
 }
