@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Configuration - Set these variables
-RAPID_DEMO_VERSION="1.3.3"
+RAPID_DEMO_VERSION="1.3.11"
 RAPID_DEMO_UI_VERSION="1.3.3"
 CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
 DEFAULT_MODEL="gemma3:1b"
-
+EMBED_MODEL_NAME="nomic-embed-text"
 # Parse command line arguments
 ACTION="install"
 MODEL_NAME="$DEFAULT_MODEL"
@@ -144,7 +144,7 @@ install_components() {
     # Create volumes
     echo "Creating volumes..."
     docker volume create $OLLAMA_VOLUME
-    docker volume create $CHROMA_VOLUME 
+    docker volume create $CHROMA_VOLUME
     docker volume create $BACKEND_CACHE
     echo "✅ Volumes created."
 
@@ -163,6 +163,7 @@ install_components() {
     echo "Pulling model $MODEL_NAME..."
     sleep 5  # Give Ollama time to initialize
     docker exec ollama ollama pull $MODEL_NAME || { echo "Error: Failed to pull model $MODEL_NAME"; exit 1; }
+    docker exec ollama ollama pull $EMBED_MODEL_NAME || { echo "Error: Failed to pull model $EMBED_MODEL_NAME"; exit 1; }
     echo "✅ Model $MODEL_NAME pulled."
 
     # Start ChromaDB
@@ -187,7 +188,7 @@ install_components() {
         --restart unless-stopped \
         -e MODEL_NAME=$MODEL_NAME \
         ratish11/rapid-demo:$RAPID_DEMO_VERSION \
-        /bin/bash -c "source .venv/bin/activate && python run.py" || { echo "Error: Failed to start Rapid Demo"; exit 1; }
+        /bin/bash -c "python run.py" || { echo "Error: Failed to start Rapid Demo"; exit 1; }
     echo "✅ Rapid Demo started."
 
     # Start Rapid Demo UI
@@ -202,6 +203,7 @@ install_components() {
 
     echo "Loading model into memory..."
     curl -s http://localhost:11434/api/generate -d "{ \"model\": \"$MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload model. It will be loaded on first request."; }
+    curl -s http://localhost:11434/api/generate -d "{ \"model\": \"$EMBED_MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload embedding model. It will be loaded on first request."; }
     docker exec ollama ollama ps
     echo "✅ Installation complete!"
 }
@@ -238,6 +240,7 @@ echo "WinGov AI Installation Script"
 echo "============================"
 echo "Action: $ACTION"
 echo "Model: $MODEL_NAME"
+echo "Embedding Model: $EMBED_MODEL_NAME"
 echo "----------------------------"
 
 # Check Docker installation
