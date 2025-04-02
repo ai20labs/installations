@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Configuration - Set these variables
-RAPID_DEMO_VERSION="1.3.11"
-RAPID_DEMO_UI_VERSION="1.3.3"
+RAPID_DEMO_VERSION="1.3.12"
+RAPID_DEMO_UI_VERSION="1.3.4"
 CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
 DEFAULT_MODEL="llama3.2"
