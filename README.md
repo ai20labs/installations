@@ -28,7 +28,11 @@ WinGov AI is an LLM-based application that leverages GPU resources for optimal p
      ```bash
       ./install.sh
      ```
-      ### Clean installation with a specific model
+      ### Clean installation
+    ```bash
+     ./install.sh --clean
+    ```
+     ### Clean installation with a specific model
     ```bash
      ./install.sh --clean --model=llama3:8b
     ```
