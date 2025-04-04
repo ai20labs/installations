@@ -151,6 +151,7 @@ install_components() {
     # Start Ollama
     echo "Starting Ollama..."
     docker run -d \
+        --gpus all
         -v $OLLAMA_VOLUME:/root/.ollama \
         -p 11434:11434 \
         --network $NETWORK_NAME \
