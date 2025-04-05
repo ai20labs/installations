@@ -186,6 +186,7 @@ install_components() {
         --network $NETWORK_NAME \
         -v $BACKEND_CACHE:/root/.cache/ \
         --name rapid-demo \
+        --env-file .env \
         --restart unless-stopped \
         -e MODEL_NAME=$MODEL_NAME \
         ratish11/rapid-demo:$RAPID_DEMO_VERSION \
