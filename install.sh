@@ -18,7 +18,7 @@ print_usage() {
     echo "Options:"
     echo "  --help                 Show this help message"
     echo "  --clean-install        Clean install (remove existing containers, networks, volumes)"
-    echo "  --clean-up                Clean (remove existing containers, networks, volumes)"
+    echo "  --clean-up             Clean (remove existing containers, networks, volumes)"
     echo "  --install              Install the application (default)"
     echo "  --restart              Restart the application"
     echo "  --stop                 Stop the application"
@@ -174,6 +174,7 @@ install_components() {
     echo "Pulling model $MODEL_NAME..."
     sleep 5  # Give Ollama time to initialize
     docker exec ollama ollama pull $MODEL_NAME || { echo "Error: Failed to pull model $MODEL_NAME"; exit 1; }
+    echo "Pulling model $EMBED_MODEL_NAME..."
     docker exec ollama ollama pull $EMBED_MODEL_NAME || { echo "Error: Failed to pull model $EMBED_MODEL_NAME"; exit 1; }
     echo "✅ Model $MODEL_NAME pulled."
 
