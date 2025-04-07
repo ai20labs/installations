@@ -2,7 +2,7 @@
 
 # Configuration - Set these variables
 RAPID_DEMO_VERSION="1.3.18"
-RAPID_DEMO_UI_VERSION="1.3.5"
+RAPID_DEMO_UI_VERSION="1.3.6"
 CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
 DEFAULT_MODEL="llama3:8b"
