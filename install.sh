@@ -7,7 +7,7 @@ CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
 DEFAULT_MODEL="llama3:8b"
 EMBED_MODEL_NAME="llama3:8b"
-NGINX_VERSION="0.0.1"
+NGINX_VERSION="0.0.2"
 
 # Parse command line arguments
 ACTION="install"
