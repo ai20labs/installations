@@ -6,7 +6,7 @@ RAPID_DEMO_UI_VERSION="1.3.5"
 CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
 DEFAULT_MODEL="llama3:8b"
-EMBED_MODEL_NAME="llama3:8b"
+EMBED_MODEL_NAME="mxbai-embed-large"
 NGINX_VERSION="0.0.2"
 
 # Parse command line arguments
@@ -197,8 +197,9 @@ install_components() {
         -v $BACKEND_CACHE:/root/.cache/ \
         --name rapid-demo \
         --env-file .env \
+        -e OLLAMA_MODEL=$MODEL_NAME \
+        -e EMBED_MODEL=$EMBED_MODEL_NAME \
         --restart unless-stopped \
-        -e MODEL_NAME=$MODEL_NAME \
         ratish11/rapid-demo:$RAPID_DEMO_VERSION \
         /bin/bash -c "python run.py" || { echo "Error: Failed to start Rapid Demo"; exit 1; }
     echo "✅ Rapid Demo started."
