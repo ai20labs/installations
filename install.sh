@@ -7,6 +7,8 @@ CHROMA_VERSION="0.6.3"
 OLLAMA_VERSION="latest"
 DEFAULT_MODEL="llama3:8b"
 EMBED_MODEL_NAME="llama3:8b"
+NGINX_VERSION="0.0.1"
+
 # Parse command line arguments
 ACTION="install"
 MODEL_NAME="$DEFAULT_MODEL"
@@ -30,8 +32,14 @@ do
         --help)
             print_usage
             ;;
+        --status)
+            ACTION="status"
+            ;;
         --clean)
             ACTION="clean"
+            ;;
+        --clean-install)
+            ACTION="clean-install"
             ;;
         --install)
             ACTION="install"
