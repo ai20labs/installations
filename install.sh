@@ -221,7 +221,7 @@ install_components() {
         --name nginx \
         --restart unless-stopped \
         ratish11/nginx:$NGINX_VERSION || { echo "Error: Failed to start Nginx"; exit 1; }
-    echo "✅ Rapid Demo UI started."
+    echo "✅ Nginx started."
 
     echo "Loading model into memory..."
     curl -s http://localhost:11434/api/generate -d "{ \"model\": \"$MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload model. It will be loaded on first request."; }
@@ -253,7 +253,7 @@ display_status() {
     docker exec ollama ollama list 2>/dev/null || echo "Cannot list models - Ollama not running"
 
     echo -e "\nAccess the application at:"
-    echo "UI: http://localhost:3000"
+    echo "UI: http://localhost:80"
 #    echo "API: http://localhost:8080"
 }
 
