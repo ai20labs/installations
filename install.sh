@@ -36,7 +36,7 @@ do
             ACTION="status"
             ;;
         --clean-up)
-            ACTION="clean"
+            ACTION="clean-up"
             ;;
         --clean-install)
             ACTION="clean-install"
