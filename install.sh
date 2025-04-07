@@ -82,14 +82,14 @@ check_docker() {
 # Function to stop containers
 stop_containers() {
     echo "Stopping containers..."
-    docker stop rapid-demo-ui rapid-demo chromadb ollama 2>/dev/null || true
+    docker stop nginx rapid-demo-ui rapid-demo chromadb ollama 2>/dev/null || true
     echo "✅ Containers stopped."
 }
 
 # Function to remove containers
 remove_containers() {
     echo "Removing containers..."
-    docker rm -f rapid-demo-ui rapid-demo chromadb ollama 2>/dev/null || true
+    docker rm -f nginx rapid-demo-ui rapid-demo chromadb ollama 2>/dev/null || true
     echo "✅ Containers removed."
 }
 
@@ -101,7 +101,7 @@ create_network() {
 }
 
 # Function to clean everything
-clean_install() {
+clean() {
     echo "Performing clean installation..."
 
     # Stop and remove containers
@@ -134,6 +134,7 @@ install_components() {
     echo "Pulling Docker images..."
     docker pull ratish11/rapid-demo:$RAPID_DEMO_VERSION || { echo "Error: Failed to pull Rapid Demo image"; exit 1; }
     docker pull ratish11/rapid-demo-ui:$RAPID_DEMO_UI_VERSION || { echo "Error: Failed to pull Rapid Demo UI image"; exit 1; }
+    docker pull ratish11/nginx:$NGINX_VERSION || { echo "Error: Failed to pull Nginx image"; exit 1; }
     docker pull chromadb/chroma:$CHROMA_VERSION || { echo "Error: Failed to pull ChromaDB image"; exit 1; }
     docker pull ollama/ollama:$OLLAMA_VERSION || { echo "Error: Failed to pull Ollama image"; exit 1; }
     echo "✅ Docker images pulled successfully."
@@ -203,6 +204,16 @@ install_components() {
         ratish11/rapid-demo-ui:$RAPID_DEMO_UI_VERSION || { echo "Error: Failed to start Rapid Demo UI"; exit 1; }
     echo "✅ Rapid Demo UI started."
 
+    # Start Nginx
+    echo "Starting Nginx..."
+    docker run -d \
+        -p 80:80 \
+        --network $NETWORK_NAME \
+        --name nginx \
+        --restart unless-stopped \
+        ratish11/nginx:$NGINX_VERSION || { echo "Error: Failed to start Nginx"; exit 1; }
+    echo "✅ Rapid Demo UI started."
+
     echo "Loading model into memory..."
     curl -s http://localhost:11434/api/generate -d "{ \"model\": \"$MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload model. It will be loaded on first request."; }
     curl -s http://localhost:11434/api/embed -d "{ \"model\": \"$EMBED_MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload embedding model. It will be loaded on first request."; }
@@ -250,8 +261,14 @@ check_docker
 
 # Execute requested action
 case $ACTION in
-    clean)
-        clean_install
+    status)
+        display_status
+        ;;
+    clean-up)
+        clean
+        ;;
+    clean-install)
+        clean
         install_components
         display_status
         ;;
