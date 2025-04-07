@@ -230,6 +230,7 @@ install_components() {
     curl -s http://localhost:11434/api/embed -d "{ \"model\": \"$EMBED_MODEL_NAME\", \"keep_alive\": -1}" > /dev/null || { echo "Warning: Failed to preload embedding model. It will be loaded on first request."; }
     docker exec ollama ollama ps
     echo "✅ Installation complete!"
+    docker ps
 }
 
 # Function to restart components
