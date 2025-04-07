@@ -18,7 +18,7 @@ print_usage() {
     echo "Options:"
     echo "  --help                 Show this help message"
     echo "  --clean-install        Clean install (remove existing containers, networks, volumes)"
-    echo "  --clean                Clean (remove existing containers, networks, volumes)"
+    echo "  --clean-up                Clean (remove existing containers, networks, volumes)"
     echo "  --install              Install the application (default)"
     echo "  --restart              Restart the application"
     echo "  --stop                 Stop the application"
@@ -35,7 +35,7 @@ do
         --status)
             ACTION="status"
             ;;
-        --clean)
+        --clean-up)
             ACTION="clean"
             ;;
         --clean-install)
